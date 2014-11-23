@@ -27,11 +27,11 @@
 
 'use strict';
 
-var DEFAULT_URL = 'compressed.tracemonkey-pldi-09.pdf';
 var DEFAULT_SCALE_DELTA = 1.1;
 var MIN_SCALE = 0.25;
 var MAX_SCALE = 10.0;
 var VIEW_HISTORY_MEMORY = 20;
+var IMAGE_DIR = '/static/pdf.js/images/';
 var SCALE_SELECT_CONTAINER_PADDING = 8;
 var SCALE_SELECT_PADDING = 22;
 var PAGE_NUMBER_LOADING_INDICATOR = 'visiblePageIsLoading';
@@ -43,13 +43,13 @@ var DISABLE_AUTO_FETCH_LOADING_BAR_TIMEOUT = 5000;
 
 PDFJS.imageResourcesPath = './images/';
 //#if (FIREFOX || MOZCENTRAL || B2G || GENERIC || CHROME)
-//PDFJS.workerSrc = '../build/pdf.worker.js';
+//PDFJS.workerSrc = '/static/pdf.js/pdf.worker.js';
 //#endif
 //#if !PRODUCTION
 PDFJS.cMapUrl = '../external/bcmaps/';
 PDFJS.cMapPacked = true;
 //#else
-//PDFJS.cMapUrl = '../web/cmaps/';
+//PDFJS.cMapUrl = '/static/pdf.js/cmaps/';
 //PDFJS.cMapPacked = true;
 //#endif
 
@@ -1487,6 +1487,11 @@ function webViewerInitialized() {
   } else {
     document.getElementById('fileInput').value = null;
   }
+  //hide unused elements
+  document.getElementById('openFile').setAttribute('hidden', 'true');
+  document.getElementById('viewBookmark').setAttribute('hidden', 'true');
+  document.getElementById('print').setAttribute('hidden', 'true');
+
 //#else
 //document.getElementById('openFile').setAttribute('hidden', 'true');
 //document.getElementById('secondaryOpenFile').setAttribute('hidden', 'true');
@@ -1501,6 +1506,7 @@ function webViewerInitialized() {
 //#else
 //if (PDFViewerApplication.preferencePdfBugEnabled) {
 //#endif
+
     // Special debugging flags in the hash section of the URL.
     var hash = document.location.hash.substring(1);
     var hashParams = PDFViewerApplication.parseQueryString(hash);
