@@ -450,6 +450,15 @@ var PageView = function pageView(container, id, scale, defaultViewport,
     }
     this.textLayer = textLayer;
 
+    var imageLayerDiv = document.createElement('div');
+    imageLayerDiv.className = 'imageLayer';
+    div.appendChild(imageLayerDiv);
+
+    var imageLayer = getVideoOverlay(this.id);
+    if(imageLayer) {
+        imageLayer.div = imageLayerDiv;
+    }
+
     // TODO(mack): use data attributes to store these
     ctx._scaleX = outputScale.sx;
     ctx._scaleY = outputScale.sy;
@@ -503,6 +512,7 @@ var PageView = function pageView(container, id, scale, defaultViewport,
     var renderContext = {
       canvasContext: ctx,
       viewport: this.viewport,
+      imageLayer: imageLayer,
       // intent: 'default', // === 'display'
       continueCallback: function pdfViewcContinueCallback(cont) {
         if (!self.renderingQueue.isHighestPriority(self)) {

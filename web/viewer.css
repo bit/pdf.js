@@ -123,6 +123,21 @@ select {
   cursor: default;
 }
 
+.imageLayer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  color: #000;
+  font-family: sans-serif;
+  pointer-events: none;
+}
+
+.imageLayer > div {
+      pointer-events: all;
+}
+
 /* outer/inner center provides horizontal center */
 .outerCenter {
   pointer-events: none;

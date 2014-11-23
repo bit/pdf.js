@@ -24,7 +24,7 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 <!--#if GENERIC || CHROME-->
     <meta name="google" content="notranslate">
 <!--#endif-->
-    <title>PDF.js viewer</title>
+    <title></title>
 
 <!--#if FIREFOX || MOZCENTRAL-->
 <!--#include viewer-snippet-firefox-extension.html-->
@@ -33,13 +33,14 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 <!--#include viewer-snippet-chrome-extension.html-->
 <!--#endif-->
 
-    <link rel="stylesheet" href="viewer.css"/>
+    <link rel="stylesheet" href="/static/pdf.js/viewer.css"/>
 <!--#if !PRODUCTION-->
-    <link rel="resource" type="application/l10n" href="locale/locale.properties"/>
+    <link rel="resource" type="application/l10n" href="/static/pdf.js/locale/locale.properties"/>
 <!--#endif-->
 
 <!--#if !(MOZCENTRAL || CHROME || MINIFIED)-->
-    <script src="compatibility.js"></script>
+    <script src="/static/oxjs/min/Ox.js?{{settings.CONFIG.site.version}}"></script>
+    <script src="/static/pdf.js/compatibility.js"></script>
 <!--#endif-->
 
 <!--#if !PRODUCTION-->
@@ -88,8 +89,15 @@ http://sourceforge.net/adobe/cmap/wiki/License/
 <!--#endif-->
 
 <!--#if !MINIFIED -->
-    <script src="debugger.js"></script>
-    <script src="viewer.js"></script>
+    <script src="/static/pdf.js/debugger.js"></script>
+    <script type="text/javascript">
+        var DEFAULT_URL = '{{url}}',
+            embeds = {{embeds|safe}},
+            editable = {{editable|safe}};
+    </script>
+    <script src="/static/pdf.js/embeds.js"></script>
+    <script src="/static/pdf.js/viewer.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/pdf.js/css/videopdf.css"/>
 <!--#else-->
 <!--#include viewer-snippet-minified.html-->
 <!--#endif-->
